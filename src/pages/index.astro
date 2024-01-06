@@ -1,0 +1,106 @@
+---
+import LogoCallum from "../components/LogoCallum.astro";
+import LogoManhole from "../components/LogoManhole.astro";
+import LogoWrux from "../components/LogoWrux.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Where to go next?">
+  <main class="flex-1 grid grid-cols-2">
+    <a class="grid-link grid-link--callum" href="https://callum.co.uk/">
+      <LogoCallum />
+    </a>
+    <a class="grid-link grid-link--wrux" href="https://wrux.com/">
+      <LogoWrux />
+    </a>
+    <a class="grid-link grid-link--manhole" href="https://manhole.gallery/">
+      <LogoManhole />
+    </a>
+    <a class="grid-link grid-link--pizza" href="https://perpetual.pizza/">
+      <img src="/pizza.png" alt="Perpetual Pizza" />
+    </a>
+  </main>
+</Layout>
+
+<style>
+  .grid-link {
+    @apply transition-colors duration-300;
+
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: var(--fg, #fff);
+    background-color: var(--bg, #fff);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .grid-link--callum {
+    font-size: 10rem;
+
+    --fg: #fbd7c7;
+    --bg: #000;
+  }
+
+  .grid-link--wrux {
+    font-size: 3rem;
+
+    --fg: #00eacf;
+    --bg: #1f1f28;
+
+    &:hover,
+    &:focus {
+      --fg: #fff;
+    }
+  }
+
+  .grid-link--manhole {
+    font-size: 4rem;
+
+    --fg: #f39f5a;
+    --bg: #0f172a;
+
+    &:hover,
+    &:focus {
+      --fg: #fff;
+    }
+  }
+
+  .grid-link--pizza {
+    font-size: 11.375rem;
+
+    --fg: #d00000;
+    --bg: #000;
+
+    &:hover,
+    &:focus {
+      --fg: #fff;
+    }
+  }
+
+  .grid-link img {
+    @apply transition-transform duration-300;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1em;
+    height: 1em;
+    transform: translate(-50%, -50%) scale(var(--scale, 1));
+  }
+
+  .grid-link svg {
+    @apply transition-transform duration-300;
+
+    width: auto;
+    height: 1em;
+    transform: scale(var(--scale, 1));
+  }
+
+  .grid-link:hover svg,
+  .grid-link:focus svg,
+  .grid-link:hover img,
+  .grid-link:focus img {
+    --scale: 1.1;
+  }
+</style>
