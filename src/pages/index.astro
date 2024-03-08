@@ -3,26 +3,65 @@ import LogoCallum from "../components/LogoCallum.astro";
 import LogoManhole from "../components/LogoManhole.astro";
 import LogoWrux from "../components/LogoWrux.astro";
 import Layout from "../layouts/Layout.astro";
+
+const sites = [
+  {
+    id: "callum",
+    name: "Callum",
+    href: "https://callum.co.uk/",
+    logo: LogoCallum,
+  },
+  {
+    id: "wrux",
+    name: "WRUX",
+    href: "https://wrux.com/",
+    logo: LogoWrux,
+  },
+  {
+    id: "manhole",
+    name: "Manhole Gallery",
+    href: "https://manhole.gallery/",
+    logo: LogoManhole,
+  },
+  {
+    id: "pizza",
+    name: "Perpetual Pizza",
+    href: "https://perpetual.pizza/",
+    image: "/pizza.png",
+  },
+];
 ---
 
 <Layout title="Where to go next?">
-  <main class="flex-1 grid grid-cols-2">
-    <a class="grid-link grid-link--callum" href="https://callum.co.uk/">
-      <LogoCallum />
-    </a>
-    <a class="grid-link grid-link--wrux" href="https://wrux.com/">
-      <LogoWrux />
-    </a>
-    <a class="grid-link grid-link--manhole" href="https://manhole.gallery/">
-      <LogoManhole />
-    </a>
-    <a class="grid-link grid-link--pizza" href="https://perpetual.pizza/">
-      <img src="/pizza.png" alt="Perpetual Pizza" />
-    </a>
+  <main class="logo-grid">
+    {
+      sites.map(({ logo: Logo, ...item }, index) => (
+        <a
+          class={`grid-link group grid-link--${item.id}`}
+          href={item.href}
+          aria-label={`Visit ${item.name}`}
+          data-keyboard-open={index + 1}
+        >
+          {Logo ? <Logo /> : <img src={item.image} alt={item.name} />}
+          <span class="absolute bottom-4 right-4 rounded-md bg-white bg-opacity-10 px-5 py-3 font-mono text-xs tracking-tighter text-white transition-all duration-300 group-hover:scale-90 group-hover:opacity-0 group-focus:scale-90 group-focus:opacity-0">
+            <span class="sr-only">Press</span>
+            <kbd>cmd + {index + 1}</kbd>
+            <span class="sr-only">to visit {item.name}</span>
+          </span>
+        </a>
+      ))
+    }
   </main>
 </Layout>
 
 <style>
+  .logo-grid {
+    display: grid;
+    flex: 1;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
   .grid-link {
     @apply transition-colors duration-300;
 
@@ -104,3 +143,16 @@ import Layout from "../layouts/Layout.astro";
     --scale: 1.1;
   }
 </style>
+
+<script>
+  document.addEventListener("keydown", (event) => {
+    if (!event.metaKey) return;
+    const target = document.querySelector<HTMLAnchorElement>(
+      `[data-keyboard-open="${event.key}"]`,
+    );
+    if (target) {
+      event.preventDefault();
+      target.click();
+    }
+  });
+</script>
