@@ -45,7 +45,7 @@ const sites = [
           {Logo ? <Logo /> : <img src={item.image} alt={item.name} />}
           <span class="absolute bottom-4 right-4 rounded-md bg-white bg-opacity-10 px-5 py-3 font-mono text-xs tracking-tighter text-white transition-all duration-300 group-hover:scale-90 group-hover:opacity-0 group-focus:scale-90 group-focus:opacity-0">
             <span class="sr-only">Press</span>
-            <kbd>control + {index + 1}</kbd>
+            <kbd>cmd + {index + 1}</kbd>
             <span class="sr-only">to visit {item.name}</span>
           </span>
         </a>
@@ -146,7 +146,7 @@ const sites = [
 
 <script>
   document.addEventListener("keydown", (event) => {
-    if (!event.ctrlKey) return;
+    if (!event.metaKey) return;
     const target = document.querySelector<HTMLAnchorElement>(
       `[data-keyboard-open="${event.key}"]`,
     );
