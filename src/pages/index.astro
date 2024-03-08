@@ -147,7 +147,7 @@ const sites = [
 <script>
   document.addEventListener("keydown", (event) => {
     if (!event.ctrlKey) return;
-    const target = document.querySelector(
+    const target = document.querySelector<HTMLAnchorElement>(
       `[data-keyboard-open="${event.key}"]`,
     );
     if (target) {
